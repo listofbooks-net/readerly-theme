@@ -15,7 +15,7 @@ permissions:
 jobs:
   tokens:
     name: Design tokens are up to date
-    runs-on: ubuntu-latest
+    runs-on: linux-x64
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
 
   theme-json:
     name: theme.json and style variations match the WordPress schema
-    runs-on: ubuntu-latest
+    runs-on: linux-x64
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
@@ -42,7 +42,7 @@ jobs:
 
   php-lint:
     name: PHP syntax (${{ matrix.php }})
-    runs-on: ubuntu-latest
+    runs-on: linux-x64
     timeout-minutes: 10
     strategy:
       fail-fast: false
@@ -65,7 +65,7 @@ jobs:
 
   hugo:
     name: Hugo theme on the minimum Hugo version and the latest
-    runs-on: ubuntu-latest
+    runs-on: linux-x64
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
@@ -90,7 +90,7 @@ jobs:
 
   ghost:
     name: Ghost theme (GScan, demo, markup and browser checks)
-    runs-on: ubuntu-latest
+    runs-on: linux-x64
     timeout-minutes: 30
     env:
       GHOST_NETWORK: readerly-ghost-ci
