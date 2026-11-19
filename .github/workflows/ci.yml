@@ -1,7 +1,7 @@
 name: CI
 
-# GitHub Actions is disabled on this repository on purpose. Run this file
-# locally with act, for example:  act pull_request -W .github/workflows/ci.yml
+# Runs as GitHub Actions on self-hosted runner-up machines (runs-on: linux-x64).
+# Read results with `gh pr checks` and failures with `gh run view --log-failed`.
 
 on:
   push:
@@ -53,7 +53,7 @@ jobs:
         with:
           persist-credentials: false
       # The files are copied into the container, not bind-mounted, so this
-      # works the same on a hosted runner and under act.
+      # works even when the Docker daemon cannot see the runner's paths.
       - name: php -l on every PHP file, theme and dev harness
         run: |
           set -euo pipefail

@@ -51,13 +51,14 @@ The theme folder is mounted read-only, so edits show up on reload. `tools/wp-dev
 
 ## Checks
 
-CI is `.github/workflows/ci.yml`. GitHub Actions is off for this repository, so run it locally with [act](https://github.com/nektos/act):
+CI is `.github/workflows/ci.yml`, run as GitHub Actions on self-hosted runner-up machines for pull requests and pushes to `main`. Push the branch, then read the result with `gh pr checks` and any failure with `gh run view --log-failed`. To check locally, run the commands each job runs, for example:
 
 ```sh
-act pull_request -W .github/workflows/ci.yml
+node tools/build-tokens.mjs --check
+npm ci --prefix tools && node tools/check-theme-json.mjs
 ```
 
-It checks that the generated files are up to date, that `theme.json` and the style files match the WordPress schema (`npm ci --prefix tools && node tools/check-theme-json.mjs`), that every PHP file passes `php -l` on PHP 7.4 and 8.4, and every Hugo and Ghost check in the sections below.
+CI checks that the generated files are up to date, that `theme.json` and the style files match the WordPress schema (`npm ci --prefix tools && node tools/check-theme-json.mjs`), that every PHP file passes `php -l` on PHP 7.4 and 8.4, and every Hugo and Ghost check in the sections below.
 
 ## Build and check the Hugo theme
 
